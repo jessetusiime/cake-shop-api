@@ -1,0 +1,352 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Cake Shop API",
+    "description": "API for managing cakes and orders",
+    "version": "1.0.0"
+  },
+  "host": "cake-shop-api-rzun.onrender.com",
+  "basePath": "/",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "tags": [
+    {
+      "name": "Cakes",
+      "description": "Cake management endpoints"
+    },
+    {
+      "name": "Orders",
+      "description": "Order management endpoints"
+    }
+  ],
+  "definitions": {
+    "Cake": {
+      "type": "object",
+      "properties": {
+        "cakeName": {
+          "type": "string",
+          "example": "Chocolate Fudge"
+        },
+        "category": {
+          "type": "string",
+          "example": "Birthday"
+        },
+        "flavor": {
+          "type": "string",
+          "example": "Chocolate"
+        },
+        "size": {
+          "type": "string",
+          "example": "2kg"
+        },
+        "price": {
+          "type": "number",
+          "example": 85000
+        },
+        "available": {
+          "type": "boolean",
+          "example": true
+        },
+        "stock": {
+          "type": "number",
+          "example": 12
+        }
+      }
+    },
+    "Order": {
+      "type": "object",
+      "properties": {
+        "customerName": {
+          "type": "string",
+          "example": "Jesse Tusiime"
+        },
+        "phoneNumber": {
+          "type": "string",
+          "example": "0772123456"
+        },
+        "cakeName": {
+          "type": "string",
+          "example": "Chocolate Fudge"
+        },
+        "quantity": {
+          "type": "number",
+          "example": 2
+        },
+        "totalPrice": {
+          "type": "number",
+          "example": 170000
+        },
+        "pickupDate": {
+          "type": "string",
+          "format": "date",
+          "example": "2026-07-20"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "Pending",
+            "Preparing",
+            "Ready",
+            "Collected"
+          ],
+          "example": "Pending"
+        }
+      }
+    }
+  },
+  "paths": {
+    "/cakes": {
+      "get": {
+        "tags": [
+          "Cakes"
+        ],
+        "summary": "Get all cakes",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Cake"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Cakes"
+        ],
+        "summary": "Create a new cake",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Cake information",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Cake"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cakes/{id}": {
+      "get": {
+        "tags": [
+          "Cakes"
+        ],
+        "summary": "Get a cake by ID",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Cake"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Cakes"
+        ],
+        "summary": "Update a cake",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Updated cake information",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Cake"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated",
+            "schema": {
+              "$ref": "#/definitions/Cake"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Cakes"
+        ],
+        "summary": "Delete a cake",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/orders": {
+      "get": {
+        "tags": [
+          "Orders"
+        ],
+        "summary": "Get all orders",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Order"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Orders"
+        ],
+        "summary": "Create a new order",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Order information",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Order"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/orders/{id}": {
+      "get": {
+        "tags": [
+          "Orders"
+        ],
+        "summary": "Get an order by ID",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Order"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Orders"
+        ],
+        "summary": "Update an order",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Updated order information",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Order"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated",
+            "schema": {
+              "$ref": "#/definitions/Order"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Orders"
+        ],
+        "summary": "Delete an order",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    }
+  }
+}
