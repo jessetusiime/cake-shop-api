@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const cakesController = require("../controllers/cakes");
+const isAuthenticated = require("../middleware/authenticate");
 
 /* #swagger.tags = ['Cakes']
    #swagger.summary = 'Get all cakes'
@@ -32,7 +33,7 @@ router.get("/:id", cakesController.getSingleCake);
        }
    }
 */
-router.post("/", cakesController.createCake);
+router.post("/", isAuthenticated, cakesController.createCake);
 
 /* #swagger.tags = ['Cakes']
    #swagger.summary = 'Update a cake'
@@ -53,13 +54,13 @@ router.post("/", cakesController.createCake);
        }
    }
 */
-router.put("/:id", cakesController.updateCake);
+router.put("/:id", isAuthenticated, cakesController.updateCake);
 
 /* #swagger.tags = ['Cakes']
    #swagger.summary = 'Delete a cake'
    #swagger.description = 'Deletes a cake by ID'
    #swagger.parameters['id'] = { description: 'Cake ID' }
 */
-router.delete("/:id", cakesController.deleteCake);
+router.delete("/:id", isAuthenticated, cakesController.deleteCake);
 
 module.exports = router;
