@@ -15,6 +15,7 @@ router.get(
         failureRedirect: "/api-docs"
     }),
     (req, res) => {
+        req.session.user = req.user;
         res.redirect("/api-docs");
     }
 );
