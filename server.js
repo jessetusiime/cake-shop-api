@@ -30,7 +30,7 @@ app.use(
         secret: process.env.SESSION_SECRET,
         resave: false,
         saveUninitialized: false,
-        proxy: true, // Add this for Render
+        proxy: true,
         cookie: {
             secure: process.env.NODE_ENV === 'production',
             maxAge: 24 * 60 * 60 * 1000
