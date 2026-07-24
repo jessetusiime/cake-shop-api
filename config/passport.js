@@ -6,7 +6,7 @@ passport.use(
         {
             clientID: process.env.CLIENT_ID,
             clientSecret: process.env.CLIENT_SECRET,
-            callbackURL: "/github/callback"
+            callbackURL: process.env.CALLBACK_URL
         },
         (accessToken, refreshToken, profile, done) => {
             return done(null, profile);

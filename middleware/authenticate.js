@@ -1,11 +1,11 @@
 const isAuthenticated = (req, res, next) => {
 
-    if (req.session.user) {
+    if (req.isAuthenticated()) {
         return next();
     }
 
     return res.status(401).json({
-        message: "You must be logged in."
+        message: "Unauthorized. Please log in with GitHub."
     });
 
 };
