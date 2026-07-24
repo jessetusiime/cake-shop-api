@@ -6,7 +6,7 @@ passport.use(
         {
             clientID: process.env.CLIENT_ID,
             clientSecret: process.env.CLIENT_SECRET,
-            callbackURL: process.env.CALLBACK_URL,
+            callbackURL: "https://cake-shop-api-rzun.onrender.com/github/callback",
             proxy: true
         },
         (accessToken, refreshToken, profile, done) => {
