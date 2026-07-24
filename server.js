@@ -18,6 +18,9 @@ const routes = require("./routes");
 
 const app = express();
 
+// Add this for Render
+app.set('trust proxy', 1);
+
 app.use(cors());
 
 app.use(express.json());
@@ -26,12 +29,16 @@ app.use(
     session({
         secret: process.env.SESSION_SECRET,
         resave: false,
-        saveUninitialized: false
+        saveUninitialized: false,
+        proxy: true, // Add this for Render
+        cookie: {
+            secure: process.env.NODE_ENV === 'production',
+            maxAge: 24 * 60 * 60 * 1000
+        }
     })
 );
 
 app.use(passport.initialize());
-
 app.use(passport.session());
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
