@@ -31,16 +31,12 @@ app.use(
 );
 
 app.use(passport.initialize());
-
 app.use(passport.session());
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
+// Routes 
 app.use("/", routes);
-
-app.get("/", (req, res) => {
-    res.send("Cake Shop API is running...");
-});
 
 const PORT = process.env.PORT || 8080;
 

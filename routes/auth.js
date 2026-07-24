@@ -1,5 +1,4 @@
 const router = require("express").Router();
-
 const passport = require("passport");
 
 // Login with GitHub
@@ -42,11 +41,6 @@ router.get("/profile", (req, res) => {
     }
 
     res.status(200).json(req.user);
-});
-
-// Home
-router.get("/", (req, res) => {
-    res.send("Cake Shop API is running...");
 });
 
 module.exports = router;
